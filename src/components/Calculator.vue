@@ -1,42 +1,50 @@
 <template>
   <div id='calculator'>
-    <div class='row'>
-      <div class='col-sm-6 mb-3'>
-        <b-form @submit.stop.prevent='calculate' novalidate>
-          <select id='spinner' v-model='calcType'>
-            <option
-              v-for='(option, i) in options'
-              v-bind:key='i'
-              v-bind:value='i'
-            >{{ option.name }}</option>
-          </select>
-          <span>{{ helper }}</span>
-          <b-form-input
-            class='mt-3 mb-3'
-            type='number'
-            v-model='number'
-            autofocus
-          ></b-form-input>
-          <span>Límite de bits</span>
-          <b-form-input class='mt-3' type='number' v-model='limit'></b-form-input>
+    <b-container>
+      <div class='block'>👨‍💻️ Calculadora</div>
+      <div class='row'>
+        <div class='col-sm-4 mb-3 middle'>
           <b-button
-            class='mt-3 mb-3'
-            variant='outline-light'
-            type='submit'
+            v-for='(option, i) in this.options'
+            :key='i'
+            @click='pick(i)'
+            :variant='calcType === i ? "primary" : "secondary"'
+            class='picker'
             block
             pill
-          >Calcular</b-button>
-        </b-form>
+          >{{ option.name }}</b-button>
+        </div>
+        <div class='col-sm-4 mb-3'>
+          <b-form @submit.stop.prevent='calculate' novalidate>
+            <p>{{ helper }}</p>
+            <b-form-input
+              class='mt-3 mb-3'
+              type='number'
+              v-model='number'
+              ref='in'
+              autofocus
+            ></b-form-input>
+            <span>Límite de bits</span>
+            <b-form-input class='mt-3' type='number' v-model='limit'></b-form-input>
+            <b-button
+              class='mt-3 mb-3'
+              variant='outline-light'
+              type='submit'
+              block
+              pill
+            >Calcular</b-button>
+          </b-form>
+        </div>
+        <div class='col-sm-4 mb-3'>
+          <template v-if='this.option.type === "dectobin"'>
+            <p class='mb-3'>Resultado Signo Magnitud</p>
+            <b-form-input v-model='result[0]' readonly></b-form-input>
+            <p class='mt-3 mb-3'>Resultado Complemento a dos</p>
+            <b-form-input v-model='result[1]' readonly></b-form-input>
+          </template>
+        </div>
       </div>
-      <div class='col-sm-6 mb-3'>
-        <template v-if='this.option.type === "dectobin"'>
-          <span>Resultado Signo Magnitud</span>
-          <b-form-input class='mt-3' v-model='result[0]'></b-form-input>
-          <span>Resultado Complemento a dos</span>
-          <b-form-input class='mt-3' v-model='result[1]'></b-form-input>
-        </template>
-      </div>
-    </div>
+    </b-container>
   </div>
 </template>
 
@@ -65,6 +73,10 @@ export default {
     }
   },
   methods: {
+    pick(i) {
+      this.calcType = i
+      this.$refs.in.focus()
+    },
     calculate() {
       this.result = []
       if (this.option.type === 'dectobin') {
@@ -96,7 +108,6 @@ export default {
           this.result.push('Overflow')
         }
         let cm = code.split('')
-        cm.push('0')
         cm = cm.reverse()
         let cmf = []
         if (negativo) {
@@ -113,8 +124,11 @@ export default {
           }
           cmf = cmf.reverse()
         } else {
+          cm.push('0')
           cmf = cm
         }
+        console.log('SM => ', sm)
+        console.log('C2 => ', cmf.join(''))
         if (cmf.length <= this.limit) {
           this.result.push(cmf.join(''))
         } else {
@@ -125,15 +139,54 @@ export default {
     }
   },
   created() {
-    this.options.push({ type: 'dectobin', name: 'Decimal 🔢 a Binario 👨‍💻️' })
-    this.options.push({ type: 'bintodec', name: 'Binario 👨‍💻️ a Decimal 🔢' })
+    this.options.push({
+      type: 'dectobin',
+      name: '🔢👨‍💻️ Decimal  a Binario '
+    })
+    this.options.push({
+      type: 'bintodec',
+      name: '👨‍💻️🔢 Binario  a Decimal '
+    })
+    this.options.push({ type: 'binpbin', name: '➕👨‍💻️ Sumar números binarios' })
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.block,
+.center {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.block {
+  font-size: 300%;
+  font-weight: lighter;
+  margin-bottom: 4rem;
+  user-select: none;
+}
+#calculator {
+  width: 100%;
+}
 #spinner {
   width: 100%;
   margin-bottom: 1rem;
+}
+.picker {
+  outline: 0;
+  box-shadow: none;
+}
+.picker.btn-secondary {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+  color: white !important;
+  border: 0px;
+}
+
+.middle {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
 }
 </style>

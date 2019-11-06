@@ -2,10 +2,12 @@
   "name": "mediocurso-arquitectura-itson",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://github.com/BrayanIribe/mediocurso-arquitectura-itson",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "deploy": "node ./node_modules/vue-gh-pages/index.js --branch gh-pages"
   },
   "dependencies": {
     "bootstrap-vue": "^2.0.4",
@@ -27,6 +29,7 @@
     "portal-vue": "^2.1.4",
     "sass-loader": "^7.1.0",
     "vue-cli-plugin-bootstrap-vue": "^0.5.0",
+    "vue-gh-pages": "^1.19.0",
     "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {
@@ -38,7 +41,9 @@
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-    "rules": {},
+    "rules": {
+      "no-console": 0
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }

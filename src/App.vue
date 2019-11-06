@@ -17,8 +17,13 @@ html,
 body,
 #app {
   width: 100%;
-  height: 100%;
-  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+#app {
+  overflow-y: scroll;
 }
 
 body {
@@ -27,10 +32,13 @@ body {
 }
 
 #app {
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background: linear-gradient(#34495e, #e74c3c);
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .form-control {
