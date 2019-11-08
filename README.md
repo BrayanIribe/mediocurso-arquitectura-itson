@@ -1,4 +1,4 @@
-# blog-isw-itson
+# mediocurso-arquitectura-itson
 
 Este proyecto fue creado a partir de la asignación "Calculadora binaria" en el segundo parcial de la asignatura Arquitectura de computadoras durante el primer semestre (2019) de la carrera Ingeniería en Software en el ITSON.
 
