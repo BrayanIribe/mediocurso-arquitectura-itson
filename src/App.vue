@@ -1,6 +1,8 @@
 <template>
   <div id='app'>
-    <Calculator></Calculator>
+    <div class='c-container'>
+      <Calculator></Calculator>
+    </div>
   </div>
 </template>
 
@@ -15,11 +17,26 @@ export default {
 <style lang="scss">
 html,
 body,
-#app {
+#app,
+.c-container {
   width: 100%;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+}
+
+.c-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 600px) {
+  .c-container {
+    height: auto;
+  }
 }
 
 #app {
@@ -32,7 +49,6 @@ body {
 }
 
 #app {
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;

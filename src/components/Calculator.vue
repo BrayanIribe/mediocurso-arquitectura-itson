@@ -36,6 +36,21 @@
           </div>
         </div>
       </b-form>
+      <div class='mt-2 row'>
+        <div class='offset-sm-2 col-sm-8 info'>
+          <p>👀 Este proyecto fue creado a partir de una asignación de la materia Arquitectura de computadoras en el ITSON durante el primer semestre de Ingeniería en Software (2019).</p>
+          <p>
+            <a
+              href='https://github.com/BrayanIribe/mediocurso-arquitectura-itson'
+            >👨‍💻️ Puedes ver el código del proyecto haciendo clic aquí.</a>
+          </p>
+          <p>
+            <a
+              href='https://github.com/BrayanIribe'
+            >😻 Visita mi perfil en Github!</a>
+          </p>
+        </div>
+      </div>
     </b-container>
   </div>
 </template>
@@ -222,6 +237,15 @@ export default {
   background-color: rgba(0, 0, 0, 0.4) !important;
   color: white !important;
   border: 0px;
+}
+.info {
+  width: 100%;
+  text-align: justify;
+}
+
+.info > p > a {
+  color: white;
+  transition: 0.25s;
 }
 
 .middle {
